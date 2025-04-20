@@ -1,9 +1,5 @@
 #include "list/playlist.hpp"
-
-#include "menu/playlist.hpp"
 #include "mainwindow.hpp"
-#include "metatypes.hpp"
-#include "util/datetime.hpp"
 
 List::Playlist::Playlist(lib::spt::api &spotify, lib::settings &settings,
 	lib::cache &cache, const lib::http_client &httpClient, QWidget *parent)
@@ -126,7 +122,7 @@ void List::Playlist::load(const std::vector<lib::spt::playlist> &playlists, cons
 
 	for (const auto &playlist: playlists)
 	{
-		if (playlist.is_null())
+		if (playlist.id.empty())
 		{
 			continue;
 		}

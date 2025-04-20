@@ -1,42 +1,31 @@
+#include "util/icon.hpp"
+#include "util/appinstalltype.hpp"
 #include "lib/qtpaths.hpp"
 #include "lib/spotify/request.hpp"
 #include "spotify/deviceselect.hpp"
-#include "util/appinstalltype.hpp"
-#include "util/icon.hpp"
 
 #include <QApplication>
 #include <QCoreApplication>
 
 #include "mainwindow.hpp"
-#include "commandline/args.hpp"
-#include "commandline/parser.hpp"
-#include "commandline/processor.hpp"
 #include "dialog/setup.hpp"
-#include "lib/crash/crashhandler.hpp"
+#include "commandline/parser.hpp"
+#include "commandline/args.hpp"
+#include "commandline/processor.hpp"
 #include "util/refresher.hpp"
 
-auto appVersion() -> QString
-{
-	QString appVersion(APP_VERSION);
-
-#ifdef GIT_COMMIT_COUNT
-	const auto commitCount = QStringLiteral(GIT_COMMIT_COUNT).toInt();
-	if (commitCount > 0)
-	{
-		appVersion.append(QStringLiteral("-dev.%1")
-			.arg(QString::number(commitCount)));
-	}
+#ifdef USE_KCRASH
+#include <kcrash.h>
+#else
+#include "lib/crash/crashhandler.hpp"
 #endif
-
-	return appVersion;
-}
 
 auto main(int argc, char *argv[]) -> int
 {
 	// Set name for settings etc.
 	QCoreApplication::setOrganizationName(ORG_NAME);
 	QCoreApplication::setApplicationName(APP_NAME);
-	QCoreApplication::setApplicationVersion(appVersion());
+	QCoreApplication::setApplicationVersion(APP_VERSION);
 
 	// Set installation type
 	if (argc > 0)
@@ -52,11 +41,22 @@ auto main(int argc, char *argv[]) -> int
 	QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
-	// Custom crash handler
+#ifndef USE_KCRASH
+	// Custom crash handler if not using KCrash
 	lib::crash_handler::init();
+#endif
 
 	// Create Qt application
 	QApplication app(argc, argv);
+
+	// Optional KCrash support
+#if defined USE_KCRASH && defined NDEBUG
+	KCrash::initialize();
+	if (!KCrash::isDrKonqiEnabled())
+	{
+		lib::log::warn("Failed to initialize crash handler");
+	}
+#endif
 
 	// Settings
 	QtPaths paths(nullptr);

@@ -1,17 +1,24 @@
-#pragma once
+#ifndef CLICKABLELABEL_H
+#define CLICKABLELABEL_H
 
 #include <QLabel>
+#include <QWidget>
+#include <Qt>
+#include <QMouseEvent>
 
-class ClickableLabel: public QLabel
-{
-	Q_OBJECT
+class ClickableLabel : public QLabel { 
+    Q_OBJECT 
 
 public:
-	explicit ClickableLabel(QWidget *parent = nullptr);
+    explicit ClickableLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
+    ~ClickableLabel();
 
 signals:
-	void clicked();
+    void clicked();
 
 protected:
-	void mousePressEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+
 };
+
+#endif // CLICKABLELABEL_H

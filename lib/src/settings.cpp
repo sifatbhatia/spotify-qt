@@ -1,7 +1,4 @@
 #include "lib/settings.hpp"
-#include "lib/log.hpp"
-
-#include <fstream>
 
 lib::settings::settings(const paths &paths)
 	: path(paths)
@@ -16,7 +13,7 @@ auto lib::settings::file_name() const -> std::string
 
 auto lib::settings::file_path() const -> std::string
 {
-	return std::filesystem::path(file_name()).parent_path().string();
+	return ghc::filesystem::path(file_name()).parent_path().string();
 }
 
 auto lib::settings::qt() -> setting::qt &
@@ -88,9 +85,9 @@ void lib::settings::save()
 	std::lock_guard<std::mutex> lock(mutex);
 
 	auto file_dir = file_path();
-	if (!std::filesystem::exists(file_dir))
+	if (!ghc::filesystem::exists(file_dir))
 	{
-		std::filesystem::create_directories(file_dir);
+		ghc::filesystem::create_directories(file_dir);
 	}
 
 	std::ofstream file(file_name());

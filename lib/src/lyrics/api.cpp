@@ -1,5 +1,4 @@
 #include "lib/lyrics/api.hpp"
-#include "lib/fmt.hpp"
 #include "lib/uri.hpp"
 
 lib::lrc::api::api(const lib::http_client &http_client)

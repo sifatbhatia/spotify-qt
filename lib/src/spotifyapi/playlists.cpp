@@ -1,4 +1,5 @@
 #include "lib/spotify/api.hpp"
+#include "lib/uri.hpp"
 
 // Currently unavailable:
 // users/{user_id}/playlists
@@ -7,9 +8,9 @@
 // playlists/{playlist_id}/images
 
 void lib::spt::api::create_playlist(const std::string &name,
-	const std::optional<std::string> &description,
-	const std::optional<bool> &is_public,
-	const std::optional<bool> &is_collaborative,
+	const lib::optional<std::string> &description,
+	const lib::optional<bool> &is_public,
+	const lib::optional<bool> &is_collaborative,
 	lib::callback<lib::spt::playlist> &callback)
 {
 	nlohmann::json json{

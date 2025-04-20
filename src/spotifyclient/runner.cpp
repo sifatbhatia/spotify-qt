@@ -1,8 +1,8 @@
 #include "spotifyclient/runner.hpp"
 
-#include "lib/enums.hpp"
 #include "lib/log.hpp"
-#include "util/url.hpp"
+
+#include "mainwindow.hpp"
 
 std::vector<lib::log_message> SpotifyClient::Runner::log;
 
@@ -203,7 +203,7 @@ auto SpotifyClient::Runner::joinArgs(const QStringList &args) -> QString
 	return result;
 }
 
-auto SpotifyClient::Runner::getCachePath() const -> std::filesystem::path
+auto SpotifyClient::Runner::getCachePath() const -> ghc::filesystem::path
 {
 	return paths.cache() / "librespot";
 }
@@ -211,13 +211,13 @@ auto SpotifyClient::Runner::getCachePath() const -> std::filesystem::path
 auto SpotifyClient::Runner::isLoggedIn() const -> bool
 {
 	const auto path = getCachePath() / "credentials.json";
-	return std::filesystem::exists(path);
+	return ghc::filesystem::exists(path);
 }
 
 auto SpotifyClient::Runner::resetCredentials() const -> bool
 {
 	const auto path = getCachePath() / "credentials.json";
-	return std::filesystem::remove(path);
+	return ghc::filesystem::remove(path);
 }
 
 void SpotifyClient::Runner::onReadyReadOutput()

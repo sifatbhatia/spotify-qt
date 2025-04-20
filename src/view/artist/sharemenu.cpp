@@ -1,7 +1,5 @@
 #include "view/artist/sharemenu.hpp"
-
 #include "mainwindow.hpp"
-#include "util/url.hpp"
 
 Artist::ShareMenu::ShareMenu(const lib::spt::artist &artist, QWidget *parent)
 	: QMenu(parent),

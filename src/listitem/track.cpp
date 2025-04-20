@@ -1,6 +1,4 @@
 #include "listitem/track.hpp"
-
-#include "metatypes.hpp"
 #include "util/icon.hpp"
 
 ListItem::Track::Track(const QStringList &strings, const lib::spt::track &track,

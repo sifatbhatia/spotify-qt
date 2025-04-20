@@ -1,7 +1,5 @@
 #include "lib/spotify/api.hpp"
 
-#include <string>
-
 void lib::spt::api::album(const std::string &id, lib::callback<lib::spt::album> &callback)
 {
 	get(lib::fmt::format("albums/{}", id), callback);
@@ -20,12 +18,12 @@ void lib::spt::api::album_tracks(const spt::album &album, const paged_callback<s
 				return callback(result);
 			}
 
-			spt::page<spt::track> page = result.value();
+			auto &page = result.value();
 			for (auto &item: page.items)
 			{
 				item.album.name = albumName;
 			}
 
-			return callback(lib::result<spt::page<spt::track>>::ok(page));
+			return callback(result);
 		});
 }

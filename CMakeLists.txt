@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.10)
 
 project(spotify-qt LANGUAGES CXX VERSION 3.12)
 
@@ -6,12 +6,15 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-# C++17 is required on some platforms by Qt 6
-set(CMAKE_CXX_STANDARD 17)
+# C++11
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Optional D-Bus support
 option(USE_DBUS "Use D-Bus integration" ON)
+
+# Optional KCrash support
+option(USE_KCRASH "Use KCrash integration" ON)
 
 # LTO support
 option(USE_LTO "Use link time optimization" OFF)
@@ -23,7 +26,7 @@ endif ()
 
 # Set target macOS version
 if (APPLE)
-	set(CMAKE_OSX_DEPLOYMENT_TARGET "12")
+	set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
 endif ()
 
 # Find Qt
@@ -31,6 +34,11 @@ include(cmake/FindQt.cmake)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Network Gui Svg REQUIRED)
 if (USE_DBUS)
 	find_package(Qt${QT_VERSION_MAJOR} OPTIONAL_COMPONENTS DBus QUIET)
+endif ()
+
+# Find KCRash
+if (USE_KCRASH)
+	find_package(KF5Crash QUIET)
 endif ()
 
 # Create main executable
@@ -66,16 +74,6 @@ if (GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 		OUTPUT_VARIABLE GIT_COMMIT
 		OUTPUT_STRIP_TRAILING_WHITESPACE)
 	target_compile_definitions(spotify-qt PRIVATE GIT_COMMIT="${GIT_COMMIT}")
-
-	execute_process(
-		COMMAND ${GIT_EXECUTABLE} rev-list --count v${PROJECT_VERSION}..HEAD
-		WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-		OUTPUT_VARIABLE DEV_COMMIT_COUNT
-		OUTPUT_STRIP_TRAILING_WHITESPACE
-	)
-	target_compile_definitions(${PROJECT_NAME} PRIVATE
-		GIT_COMMIT_COUNT="${DEV_COMMIT_COUNT}"
-	)
 endif ()
 
 # App related definitions
@@ -140,4 +138,10 @@ endif ()
 if (Qt${QT_VERSION_MAJOR}DBus_FOUND)
 	target_compile_definitions(spotify-qt PRIVATE USE_DBUS)
 	target_link_libraries(spotify-qt PRIVATE Qt${QT_VERSION_MAJOR}::DBus)
+endif ()
+
+# KCrash support
+if (KF5Crash_FOUND AND NOT USE_QT6)
+	target_compile_definitions(spotify-qt PRIVATE USE_KCRASH)
+	target_link_libraries(spotify-qt PRIVATE KF5::Crash)
 endif ()

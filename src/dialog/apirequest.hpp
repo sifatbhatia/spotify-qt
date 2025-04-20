@@ -12,7 +12,6 @@
 #include <QTabWidget>
 #include <QPushButton>
 #include <QMessageBox>
-#include <QJsonDocument>
 #include <QJsonParseError>
 #include <QNetworkReply>
 #include <QCoreApplication>

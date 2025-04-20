@@ -1,9 +1,5 @@
 #include "dialog/whatsnew.hpp"
-
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QDialogButtonBox>
-#include <QPushButton>
+#include "mainwindow.hpp"
 
 Dialog::WhatsNew::WhatsNew(lib::settings &settings,
 	const lib::http_client &httpClient, QWidget *parent)

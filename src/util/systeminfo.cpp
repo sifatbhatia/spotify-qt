@@ -8,9 +8,9 @@ SystemInfo::SystemInfo()
 	// spotify-qt version
 #ifdef GIT_COMMIT
 	add(QStringLiteral("App version"), QString("%1 (%2)")
-		.arg(QCoreApplication::applicationVersion(), GIT_COMMIT));
+		.arg(APP_VERSION, GIT_COMMIT));
 #else
-	add(QStringLiteral("App version"), QCoreApplication::applicationVersion());
+	add(QStringLiteral("App version"), APP_VERSION);
 #endif
 
 	// Qt D-Bus support
@@ -18,6 +18,13 @@ SystemInfo::SystemInfo()
 	add(QStringLiteral("D-Bus support"), QStringLiteral("Yes"));
 #else
 	add(QStringLiteral("D-Bus support"), QStringLiteral("No"));
+#endif
+
+	// KCrash support
+#ifdef USE_KCRASH
+	add(QStringLiteral("KCrash support"), QStringLiteral("Yes"));
+#else
+	add(QStringLiteral("KCrash support"), QStringLiteral("No"));
 #endif
 
 	// App install type

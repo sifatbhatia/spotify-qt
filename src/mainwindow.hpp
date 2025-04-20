@@ -1,23 +1,6 @@
 #pragma once
 
-#include "lib/settings.hpp"
-#include "lib/cache/jsoncache.hpp"
-#include "lib/qt/httpclient.hpp"
-#include "lib/spotify/api.hpp"
-#include "list/library.hpp"
-#include "list/playlist.hpp"
-#include "list/tracks.hpp"
-#include "mediaplayer/service.hpp"
-#include "spotifyclient/runner.hpp"
-#include "view/maincontent.hpp"
-#include "view/maintoolbar.hpp"
-#include "view/trayicon.hpp"
-#include "view/context/view.hpp"
-#include "widget/historybutton.hpp"
-
-#include <QListWidgetItem>
-#include <QMainWindow>
-#include <QTreeWidgetItem>
+#include "main.hpp"
 
 class MainWindow: public QMainWindow
 {

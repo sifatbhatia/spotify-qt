@@ -1,5 +1,4 @@
 #include "lib/qt/httpclient.hpp"
-#include "lib/log.hpp"
 
 lib::qt::http_client::http_client(QObject *parent)
 	: QObject(parent),

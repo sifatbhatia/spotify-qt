@@ -29,7 +29,7 @@ configured from within the app.
 
 ## Supported platforms
 
-Any system with a C++17 compiler and Qt 6 is supported, but only Linux (x64) and macOS (arm64)
+Any system with a C++11 compiler and Qt is supported, but only Linux, Windows (x64) and macOS (arm64)
 are regularly being tested, so if an issue occurs on your favorite platform, please report it.
 
 ## Installing
@@ -48,7 +48,6 @@ free to, just please open an issue, or get in contact with me, so I can add it t
 | NixOS                | [![nixpkgs unstable](https://repology.org/badge/version-for-repo/nix_unstable/spotify-qt.svg?header=nixpkgs%20unstable)](https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/audio/spotify-qt/default.nix)                                       | [karthikiyengar](https://github.com/karthikiyengar) |
 | openSUSE             | [![openSUSE Multimedia:Apps Tumbleweed package](https://repology.org/badge/version-for-repo/opensuse_multimedia_apps_tumbleweed/spotify-qt.svg?header=openSUSE)](https://software.opensuse.org//download.html?project=multimedia%3Aapps&package=spotify-qt) | [KaratekHD](https://github.com/KaratekHD)           |
 | Alpine Linux         | [![Alpine Linux Edge](https://repology.org/badge/version-for-repo/alpine_edge/spotify-qt.svg?header=Alpine%20Linux%20Edge)](https://pkgs.alpinelinux.org/packages?name=spotify-qt)                                                                          | [ptrcnull](https://github.com/ptrcnull)             |
-| Fedora               | [![Copr](https://repology.org/badge/version-for-repo/aur/spotify-qt.svg?header=Copr)](https://copr.fedorainfracloud.org/coprs/kraxarn/spotify-qt)                                                                                                           | [kraxarn](https://github.com/kraxarn)               |
 | Windows              | [![Scoop extras](https://repology.org/badge/version-for-repo/scoop/spotify-qt.svg?header=Scoop%20extras)](https://github.com/ScoopInstaller/Extras/blob/master/bucket/spotify-qt.json)                                                                      | [brian6932](https://github.com/brian6932)           |
 
 If you're running some other Linux distribution, macOS, or Windows, you can instead download portable binaries from the
@@ -66,7 +65,7 @@ or [issues](https://github.com/kraxarn/spotify-qt/issues), for planned features 
 
 ## Building yourself
 
-Make sure you have Qt (6.0+) with SVG support, CMake (3.16+) and various build tools like
+Make sure you have Qt (5.9+/6.0+) with SVG support, CMake (3.5+) and various build tools like
 `make`, `g++` and `git`. Keep in mind that the master branch is unstable at all times. Therefore,
 it's recommended to use the stable branch, which is updated after each new stable release, only
 including important bug fixes, unless you want to try out new features.

@@ -5,10 +5,6 @@
 
 #include <QStandardPaths>
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-#include <QtVersionChecks>
-#endif
-
 SettingsPage::Spotify::Spotify(lib::settings &settings, QWidget *parent)
 	: SettingsPage::Base(settings, parent)
 {
@@ -92,15 +88,8 @@ auto SettingsPage::Spotify::spotify() -> QWidget *
 	sptAppStart->setToolTip("Start, and close, spotify client together with the app "
 							"(only closes when using app config)");
 	sptAppStart->setChecked(settings.spotify.start_client);
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
 	QCheckBox::connect(sptAppStart, &QCheckBox::stateChanged,
 		this, &SettingsPage::Spotify::startClientToggle);
-#else
-	QCheckBox::connect(sptAppStart, &QCheckBox::checkStateChanged,
-		this, &SettingsPage::Spotify::startClientToggle);
-#endif
-
 	content->addWidget(sptAppStart);
 
 	// Always start
@@ -192,15 +181,8 @@ auto SettingsPage::Spotify::config() -> QWidget *
 	sptGlobal->setToolTip("Use spotifyd.conf file in ~/.config/spotifyd, /etc or "
 						  "/etc/xdg/spotifyd (spotifyd only)");
 	sptGlobal->setChecked(settings.spotify.global_config);
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
-	connect(sptGlobal, &QCheckBox::stateChanged,
-		this, &Spotify::globalConfigToggle);
-#else
-	connect(sptGlobal, &QCheckBox::checkStateChanged,
-		this, &Spotify::globalConfigToggle);
-#endif
-
+	QCheckBox::connect(sptGlobal, &QCheckBox::stateChanged,
+		this, &SettingsPage::Spotify::globalConfigToggle);
 	content->addWidget(sptGlobal);
 
 	// Box and layout for all app specific settings

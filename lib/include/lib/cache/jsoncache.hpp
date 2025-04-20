@@ -1,8 +1,10 @@
 #pragma once
 
 #include "lib/cache.hpp"
-#include "lib/filesystem.hpp"
+#include "lib/json.hpp"
 #include "lib/paths/paths.hpp"
+#include "thirdparty/filesystem.hpp"
+#include "thirdparty/json.hpp"
 
 namespace lib
 {
@@ -50,7 +52,7 @@ namespace lib
 		/**
 		 * Get parent directory for cache type
 		 */
-		auto dir(const std::string &type) const -> std::filesystem::path;
+		auto dir(const std::string &type) const -> ghc::filesystem::path;
 
 		/**
 		 * Get file name for id
@@ -66,6 +68,6 @@ namespace lib
 		/**
 		 * Get basename of path
 		 */
-		static auto get_url_id(const std::filesystem::path &path) -> std::string;
+		static auto get_url_id(const ghc::filesystem::path &path) -> std::string;
 	};
 }

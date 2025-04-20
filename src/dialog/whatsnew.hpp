@@ -4,6 +4,7 @@
 #include "lib/github/api.hpp"
 
 #include <QDialog>
+#include <QVBoxLayout>
 #include <QTextEdit>
 
 namespace Dialog

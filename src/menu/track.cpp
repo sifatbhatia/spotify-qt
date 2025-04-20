@@ -1,11 +1,7 @@
 #include "menu/track.hpp"
 
 #include "mainwindow.hpp"
-#include "metatypes.hpp"
 #include "menu/addtoplaylist.hpp"
-#include "util/url.hpp"
-
-#include <QClipboard>
 
 Menu::Track::Track(const lib::spt::track &track, lib::spt::api &spotify,
 	const lib::cache &cache, QWidget *parent)

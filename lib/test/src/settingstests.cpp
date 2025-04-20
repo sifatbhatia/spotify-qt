@@ -1,10 +1,8 @@
-#include "lib/filesystem.hpp"
-#include "lib/log.hpp"
-#include "lib/settings.hpp"
-#include "lib/paths/paths.hpp"
 #include "thirdparty/doctest.h"
+#include "lib/settings.hpp"
 
-#include <fstream>
+#include "lib/paths/paths.hpp"
+#include "thirdparty/filesystem.hpp"
 
 class test_paths: public lib::paths
 {
@@ -16,17 +14,17 @@ public:
 
 	~test_paths()
 	{
-		std::filesystem::remove(config_file());
+		ghc::filesystem::remove(config_file());
 	}
 
-	auto config_file() const -> std::filesystem::path override
+	auto config_file() const -> ghc::filesystem::path override
 	{
-		return std::filesystem::temp_directory_path() / "spotify-qt.json";
+		return ghc::filesystem::temp_directory_path() / "spotify-qt.json";
 	}
 
-	auto cache() const -> std::filesystem::path override
+	auto cache() const -> ghc::filesystem::path override
 	{
-		return std::filesystem::temp_directory_path() / "cache";
+		return ghc::filesystem::temp_directory_path() / "cache";
 	}
 };
 
@@ -36,7 +34,7 @@ TEST_CASE("settings")
 
 	auto read_settings = [&paths]() -> nlohmann::json
 	{
-		std::ifstream file(paths.config_file());
+		ghc::filesystem::ifstream file(paths.config_file());
 		nlohmann::json json;
 		file >> json;
 

@@ -1,10 +1,8 @@
 #include "menu/addtoplaylist.hpp"
-
-#include "dialog/addtoplaylist.hpp"
 #include "mainwindow.hpp"
-#include "metatypes.hpp"
-#include "dialog/createplaylist.hpp"
 #include "util/icon.hpp"
+#include "dialog/createplaylist.hpp"
+#include "dialog/addtoplaylist.hpp"
 
 Menu::AddToPlaylist::AddToPlaylist(std::vector<std::string> trackIds, lib::spt::api &spotify,
 	const lib::cache &cache, QWidget *parent)

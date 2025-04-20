@@ -1,8 +1,6 @@
 #include "systeminfoview.hpp"
 #include "mainwindow.hpp"
 
-#include <QClipboard>
-
 SystemInfoView::SystemInfoView(QWidget *parent)
 	: QWidget(parent)
 {
